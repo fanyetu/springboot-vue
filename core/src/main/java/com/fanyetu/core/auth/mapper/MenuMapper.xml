@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanyetu.core.auth.mapper.MenuMapper">
+
+    <resultMap type="com.fanyetu.core.auth.entity.Menu" id="MenuMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="url" column="url"/>
+        <result property="path" column="path"/>
+        <result property="component" column="component"/>
+        <result property="name" column="name"/>
+        <result property="iconCls" column="icon_cls"/>
+        <result property="keepAlive" column="keep_alive"/>
+        <result property="requireAuth" column="require_auth"/>
+        <result property="enable" column="enable"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+
+        <collection property="roles" resultMap="RoleMap" ofType="com.fanyetu.core.auth.entity.Role"/>
+    </resultMap>
+
+    <resultMap id="RoleMap" type="com.fanyetu.core.auth.entity.Role">
+        <result property="name" column="role_name"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="description" column="description"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="queryMenuListByRoles" parameterType="java.lang.Integer" resultMap="MenuMap">
+        select a.id, a.parent_id, a.url, a.path, a.component, a.name,
+               a.icon_cls, a.keep_alive, a.require_auth, a.enable
+        from t_menu a, t_role_menu b
+        where a.id = b.menu_id
+        <if test="roleIds != null">
+            <foreach collection="roleIds" item="item" index="index" open="AND b.role_id IN(" separator="," close=")">
+                #{roleIds[${index}]}
+            </foreach>
+        </if>
+        and a.del_flag = 0
+        and a.enable = 1
+    </select>
+
+    <select id="queryAll" resultMap="MenuMap">
+        select
+            a.id,
+            a.parent_id,
+            a.url,
+            a.path,
+            a.component,
+            a.name,
+            a.icon_cls,
+            a.keep_alive,
+            a.require_auth,
+            a.enable,
+            d.name as role_name,
+            d.cn_name,
+            d.description,
+            d.type
+        from t_menu a
+                 left join (
+                select b.name,
+                       b.cn_name,
+                       b.description,
+                       b.type,
+                       c.menu_id
+                from t_role b,
+                     t_role_menu c
+                where b.id = c.role_id
+                  and b.del_flag = 0
+            ) d on a.id = d.menu_id
+        where a.del_flag = 0
+        and a.enable = 1
+    </select>
+
+</mapper>

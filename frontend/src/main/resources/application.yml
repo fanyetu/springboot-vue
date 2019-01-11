@@ -1,0 +1,12 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/elk-manager?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+    username: root
+    password: 111111
+mybatis:
+  type-aliases-package: com.fanyetu
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

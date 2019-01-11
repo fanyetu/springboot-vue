@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanyetu.core.auth.mapper.UserMapper">
+
+    <resultMap type="com.fanyetu.core.auth.entity.User" id="UserMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="enable" column="enable"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="avatar" column="avatar"/>
+        <result property="remark" column="remark"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+
+        <collection property="roles" resultMap="RoleMap" ofType="com.fanyetu.core.auth.entity.Role"/>
+    </resultMap>
+
+    <resultMap id="RoleMap" type="com.fanyetu.core.auth.entity.Role">
+        <result property="id" column="role_id"/>
+        <result property="name" column="role_name"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="description" column="description"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <!--TODO 有问题-->
+    <select id="queryByUsername" resultMap="UserMap">
+        select
+            a.id,
+            a.name,
+            a.gender,
+            a.phone,
+            a.address,
+            a.enable,
+            a.username,
+            a.password,
+            a.avatar,
+            a.remark,
+            d.id as role_id,
+            d.name as role_name,
+            d.cn_name,
+            d.description,
+            d.type
+        from t_user a
+                 left join (
+                select b.id,
+                       b.name,
+                       b.cn_name,
+                       b.description,
+                       b.type,
+                       c.user_id
+                from t_role b,
+                     t_user_role c
+                where b.id = c.role_id
+                  and b.del_flag = 0
+            ) d on a.id = d.user_id
+        where a.del_flag = 0
+        <if test="username != null">
+            and a.username = #{username,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

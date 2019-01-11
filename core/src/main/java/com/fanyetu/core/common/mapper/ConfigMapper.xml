@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanyetu.core.common.mapper.ConfigMapper">
+
+    <resultMap id="ConfigMap" type="com.fanyetu.core.common.entity.ConfigEntity">
+        <result column="key" property="key"/>
+        <result column="value" property="value"/>
+    </resultMap>
+
+    <select id="queryValueByKey" parameterType="java.lang.String" resultType="java.lang.String">
+        select a.value
+        from t_config a
+        where a.key = #{key}
+    </select>
+
+    <insert id="insertConfig">
+        insert into t_config (`key`,
+                              `value`)
+        values (#{key},
+                #{value})
+    </insert>
+
+    <update id="updateConfig">
+        update t_config
+        set `value`= #{value}
+        where `key` = #{key}
+    </update>
+</mapper>

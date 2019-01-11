@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanyetu.core.auth.mapper.base.RoleBaseMapper">
+
+
+    <insert id="insertRole" >
+        INSERT INTO `t_role`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="cnName!=null">
+                        `cn_name`,
+                    </if>
+                    <if test="description!=null">
+                        `description`,
+                    </if>
+                    <if test="type!=null">
+                        `type`,
+                    </if>
+                    <if test="createUser!=null">
+                        `create_user`,
+                    </if>
+                    <if test="createTime!=null">
+                        `create_time`,
+                    </if>
+                    <if test="updateUser!=null">
+                        `update_user`,
+                    </if>
+                    <if test="updateTime!=null">
+                        `update_time`,
+                    </if>
+                    <if test="delFlag!=null">
+                        `del_flag`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="cnName!=null">
+                    #{cnName},
+                </if>
+                <if test="description!=null">
+                    #{description},
+                </if>
+                <if test="type!=null">
+                    #{type},
+                </if>
+                <if test="createUser!=null">
+                    #{createUser},
+                </if>
+                <if test="createTime!=null">
+                    #{createTime},
+                </if>
+                <if test="updateUser!=null">
+                    #{updateUser},
+                </if>
+                <if test="updateTime!=null">
+                    #{updateTime},
+                </if>
+                <if test="delFlag!=null">
+                    #{delFlag},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateRole">
+        UPDATE `t_role`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="cnName != null and cnName!=''">
+                `cn_name` = #{cnName},
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description},
+            </if>
+            <if test="type != null and type!=''">
+                `type` = #{type},
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime},
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `t_role`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.name != null and set.name!=''">
+            `name` = #{set.name},
+        </if>
+        <if test="set.cnName != null and set.cnName!=''">
+            `cn_name` = #{set.cnName},
+        </if>
+        <if test="set.description != null and set.description!=''">
+            `description` = #{set.description},
+        </if>
+        <if test="set.type != null and set.type!=''">
+            `type` = #{set.type},
+        </if>
+        <if test="set.createUser != null">
+            `create_user` = #{set.createUser},
+        </if>
+        <if test="set.createTime != null">
+            `create_time` = #{set.createTime},
+        </if>
+        <if test="set.updateUser != null">
+            `update_user` = #{set.updateUser},
+        </if>
+        <if test="set.updateTime != null">
+            `update_time` = #{set.updateTime},
+        </if>
+        <if test="set.delFlag != null">
+            `del_flag` = #{set.delFlag},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.nameList != null">
+                    `name` in
+                    <foreach collection="where.nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyName!=null and where.fuzzyName.size()>0">
+                (
+                <foreach collection="where.fuzzyName"  separator="or" item="item">
+                    `Name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyName!=null and where.rightFuzzyName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyName"  separator="or" item="item">
+                    `Name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.cnNameList != null">
+                    `cn_name` in
+                    <foreach collection="where.cnNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyCnName!=null and where.fuzzyCnName.size()>0">
+                (
+                <foreach collection="where.fuzzyCnName"  separator="or" item="item">
+                    `Cn_name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyCnName!=null and where.rightFuzzyCnName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyCnName"  separator="or" item="item">
+                    `Cn_name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.descriptionList != null">
+                    `description` in
+                    <foreach collection="where.descriptionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDescription!=null and where.fuzzyDescription.size()>0">
+                (
+                <foreach collection="where.fuzzyDescription"  separator="or" item="item">
+                    `Description` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDescription!=null and where.rightFuzzyDescription.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDescription"  separator="or" item="item">
+                    `Description` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.typeList != null">
+                    `type` in
+                    <foreach collection="where.typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyType!=null and where.fuzzyType.size()>0">
+                (
+                <foreach collection="where.fuzzyType"  separator="or" item="item">
+                    `Type` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyType!=null and where.rightFuzzyType.size()>0">
+                (
+                <foreach collection="where.rightFuzzyType"  separator="or" item="item">
+                    `Type` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.createUserList != null">
+                    `create_user` in
+                    <foreach collection="where.createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createUserSt !=null">
+                `create_user` >= #{where.createUserSt} and
+            </if>
+            <if test="where.createUserEd!=null">
+                `create_user` &lt;= #{where.createUserEd} and
+            </if>
+                <if test="where.createTimeList != null">
+                    `create_time` in
+                    <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createTimeSt !=null">
+                `create_time` >= #{where.createTimeSt} and
+            </if>
+            <if test="where.createTimeEd!=null">
+                `create_time` &lt;= #{where.createTimeEd} and
+            </if>
+                <if test="where.updateUserList != null">
+                    `update_user` in
+                    <foreach collection="where.updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updateUserSt !=null">
+                `update_user` >= #{where.updateUserSt} and
+            </if>
+            <if test="where.updateUserEd!=null">
+                `update_user` &lt;= #{where.updateUserEd} and
+            </if>
+                <if test="where.updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updateTimeSt !=null">
+                `update_time` >= #{where.updateTimeSt} and
+            </if>
+            <if test="where.updateTimeEd!=null">
+                `update_time` &lt;= #{where.updateTimeEd} and
+            </if>
+                <if test="where.delFlagList != null">
+                    `del_flag` in
+                    <foreach collection="where.delFlagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.delFlagSt !=null">
+                `del_flag` >= #{where.delFlagSt} and
+            </if>
+            <if test="where.delFlagEd!=null">
+                `del_flag` &lt;= #{where.delFlagEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.fanyetu.core.auth.entity.Role" id="RoleMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="description" column="description"/>
+        <result property="type" column="type"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+
+    <select id="queryRole" resultMap="RoleMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_role`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="cnName != null and cnName!=''">
+                `cn_name` = #{cnName} and
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description} and
+            </if>
+            <if test="type != null and type!=''">
+                `type` = #{type} and
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag} and
+            </if>
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Role$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="cnNameList != null">
+                    `cn_name` in
+                    <foreach collection="cnNameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyCnName!=null and fuzzyCnName.size()>0">
+                    (
+                    <foreach collection="fuzzyCnName"  separator="or" item="item">
+                        `Cn_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCnName!=null and rightFuzzyCnName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCnName"  separator="or" item="item">
+                        `Cn_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="descriptionList != null">
+                    `description` in
+                    <foreach collection="descriptionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyDescription!=null and fuzzyDescription.size()>0">
+                    (
+                    <foreach collection="fuzzyDescription"  separator="or" item="item">
+                        `Description` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDescription!=null and rightFuzzyDescription.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDescription"  separator="or" item="item">
+                        `Description` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="typeList != null">
+                    `type` in
+                    <foreach collection="typeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyType!=null and fuzzyType.size()>0">
+                    (
+                    <foreach collection="fuzzyType"  separator="or" item="item">
+                        `Type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyType!=null and rightFuzzyType.size()>0">
+                    (
+                    <foreach collection="rightFuzzyType"  separator="or" item="item">
+                        `Type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="createUserList != null">
+                    `create_user` in
+                    <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createUserSt !=null">
+                    `create_user` >= #{createUserSt} and
+                </if>
+                <if test="createUserEd!=null">
+                    `create_user` &lt;= #{createUserEd} and
+                </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                <if test="updateUserList != null">
+                    `update_user` in
+                    <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateUserSt !=null">
+                    `update_user` >= #{updateUserSt} and
+                </if>
+                <if test="updateUserEd!=null">
+                    `update_user` &lt;= #{updateUserEd} and
+                </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                <if test="delFlagList != null">
+                    `del_flag` in
+                    <foreach collection="delFlagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="delFlagSt !=null">
+                    `del_flag` >= #{delFlagSt} and
+                </if>
+                <if test="delFlagEd!=null">
+                    `del_flag` &lt;= #{delFlagEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryRoleLimit1" resultMap="RoleMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_role`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="cnName != null and cnName!=''">
+                `cn_name` = #{cnName} and
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description} and
+            </if>
+            <if test="type != null and type!=''">
+                `type` = #{type} and
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag} and
+            </if>
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Role$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="cnNameList != null">
+                        `cn_name` in
+                        <foreach collection="cnNameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyCnName!=null and fuzzyCnName.size()>0">
+                    (
+                    <foreach collection="fuzzyCnName"  separator="or" item="item">
+                        `Cn_name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyCnName!=null and rightFuzzyCnName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyCnName"  separator="or" item="item">
+                        `Cn_name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="descriptionList != null">
+                        `description` in
+                        <foreach collection="descriptionList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyDescription!=null and fuzzyDescription.size()>0">
+                    (
+                    <foreach collection="fuzzyDescription"  separator="or" item="item">
+                        `Description` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDescription!=null and rightFuzzyDescription.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDescription"  separator="or" item="item">
+                        `Description` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="typeList != null">
+                        `type` in
+                        <foreach collection="typeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyType!=null and fuzzyType.size()>0">
+                    (
+                    <foreach collection="fuzzyType"  separator="or" item="item">
+                        `Type` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyType!=null and rightFuzzyType.size()>0">
+                    (
+                    <foreach collection="rightFuzzyType"  separator="or" item="item">
+                        `Type` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="createUserList != null">
+                        `create_user` in
+                        <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createUserSt !=null">
+                    `create_user` >= #{createUserSt} and
+                </if>
+                <if test="createUserEd!=null">
+                    `create_user` &lt;= #{createUserEd} and
+                </if>
+                    <if test="createTimeList != null">
+                        `create_time` in
+                        <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                    <if test="updateUserList != null">
+                        `update_user` in
+                        <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updateUserSt !=null">
+                    `update_user` >= #{updateUserSt} and
+                </if>
+                <if test="updateUserEd!=null">
+                    `update_user` &lt;= #{updateUserEd} and
+                </if>
+                    <if test="updateTimeList != null">
+                        `update_time` in
+                        <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                    <if test="delFlagList != null">
+                        `del_flag` in
+                        <foreach collection="delFlagList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="delFlagSt !=null">
+                    `del_flag` >= #{delFlagSt} and
+                </if>
+                <if test="delFlagEd!=null">
+                    `del_flag` &lt;= #{delFlagEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `name`,
+        `cn_name`,
+        `description`,
+        `type`,
+        `create_user`,
+        `create_time`,
+        `update_user`,
+        `update_time`,
+        `del_flag`+0 as `del_flag`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Role$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.cnName==true">
+                        `cn_name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.description==true">
+                        `description`,
+                    </if>
+                    <if test="fetchFields.fetchFields.type==true">
+                        `type`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createUser==true">
+                        `create_user`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createTime==true">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updateUser==true">
+                        `update_user`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updateTime==true">
+                        `update_time`,
+                    </if>
+                    <if test="fetchFields.fetchFields.delFlag==true">
+                        `del_flag`+0 as `del_flag`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.cnName==null">
+                        `cn_name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.description==null">
+                        `description`,
+                    </if>
+                    <if test="fetchFields.excludeFields.type==null">
+                        `type`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createUser==null">
+                        `create_user`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createTime==null">
+                        `create_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updateUser==null">
+                        `update_user`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updateTime==null">
+                        `update_time`,
+                    </if>
+                    <if test="fetchFields.excludeFields.delFlag==null">
+                        `del_flag`+0 as `del_flag`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.fanyetu.core.auth.entity.Role$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

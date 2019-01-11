@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanyetu.core.auth.mapper.base.MenuBaseMapper">
+
+
+    <insert id="insertMenu" >
+        INSERT INTO `t_menu`
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                `id`,
+            </if>
+            <if test="parentId!=null">
+                `parent_id`,
+            </if>
+            <if test="url!=null">
+                `url`,
+            </if>
+            <if test="path!=null">
+                `path`,
+            </if>
+            <if test="component!=null">
+                `component`,
+            </if>
+            <if test="name!=null">
+                `name`,
+            </if>
+            <if test="iconCls!=null">
+                `icon_cls`,
+            </if>
+            <if test="keepAlive!=null">
+                `keep_alive`,
+            </if>
+            <if test="requireAuth!=null">
+                `require_auth`,
+            </if>
+            <if test="enable!=null">
+                `enable`,
+            </if>
+            <if test="createUser!=null">
+                `create_user`,
+            </if>
+            <if test="createTime!=null">
+                `create_time`,
+            </if>
+            <if test="updateUser!=null">
+                `update_user`,
+            </if>
+            <if test="updateTime!=null">
+                `update_time`,
+            </if>
+            <if test="delFlag!=null">
+                `del_flag`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="parentId!=null">
+                #{parentId},
+            </if>
+            <if test="url!=null">
+                #{url},
+            </if>
+            <if test="path!=null">
+                #{path},
+            </if>
+            <if test="component!=null">
+                #{component},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="iconCls!=null">
+                #{iconCls},
+            </if>
+            <if test="keepAlive!=null">
+                #{keepAlive},
+            </if>
+            <if test="requireAuth!=null">
+                #{requireAuth},
+            </if>
+            <if test="enable!=null">
+                #{enable},
+            </if>
+            <if test="createUser!=null">
+                #{createUser},
+            </if>
+            <if test="createTime!=null">
+                #{createTime},
+            </if>
+            <if test="updateUser!=null">
+                #{updateUser},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime},
+            </if>
+            <if test="delFlag!=null">
+                #{delFlag},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateMenu">
+        UPDATE `t_menu`
+        SET
+        <trim suffixOverrides=",">
+            <if test="parentId != null">
+                `parent_id` = #{parentId},
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url},
+            </if>
+            <if test="path != null and path!=''">
+                `path` = #{path},
+            </if>
+            <if test="component != null and component!=''">
+                `component` = #{component},
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="iconCls != null and iconCls!=''">
+                `icon_cls` = #{iconCls},
+            </if>
+            <if test="keepAlive != null">
+                `keep_alive` = #{keepAlive},
+            </if>
+            <if test="requireAuth != null">
+                `require_auth` = #{requireAuth},
+            </if>
+            <if test="enable != null">
+                `enable` = #{enable},
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime},
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `t_menu`
+        SET
+        <trim suffixOverrides=",">
+            <if test="set.parentId != null">
+                `parent_id` = #{set.parentId},
+            </if>
+            <if test="set.url != null and set.url!=''">
+                `url` = #{set.url},
+            </if>
+            <if test="set.path != null and set.path!=''">
+                `path` = #{set.path},
+            </if>
+            <if test="set.component != null and set.component!=''">
+                `component` = #{set.component},
+            </if>
+            <if test="set.name != null and set.name!=''">
+                `name` = #{set.name},
+            </if>
+            <if test="set.iconCls != null and set.iconCls!=''">
+                `icon_cls` = #{set.iconCls},
+            </if>
+            <if test="set.keepAlive != null">
+                `keep_alive` = #{set.keepAlive},
+            </if>
+            <if test="set.requireAuth != null">
+                `require_auth` = #{set.requireAuth},
+            </if>
+            <if test="set.enable != null">
+                `enable` = #{set.enable},
+            </if>
+            <if test="set.createUser != null">
+                `create_user` = #{set.createUser},
+            </if>
+            <if test="set.createTime != null">
+                `create_time` = #{set.createTime},
+            </if>
+            <if test="set.updateUser != null">
+                `update_user` = #{set.updateUser},
+            </if>
+            <if test="set.updateTime != null">
+                `update_time` = #{set.updateTime},
+            </if>
+            <if test="set.delFlag != null">
+                `del_flag` = #{set.delFlag},
+            </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="where.idList != null">
+                `id` in
+                <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+            <if test="where.parentIdList != null">
+                `parent_id` in
+                <foreach collection="where.parentIdList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.parentIdSt !=null">
+                `parent_id` >= #{where.parentIdSt} and
+            </if>
+            <if test="where.parentIdEd!=null">
+                `parent_id` &lt;= #{where.parentIdEd} and
+            </if>
+            <if test="where.urlList != null">
+                `url` in
+                <foreach collection="where.urlList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test ="where.fuzzyUrl!=null and where.fuzzyUrl.size()>0">
+                (
+                <foreach collection="where.fuzzyUrl"  separator="or" item="item">
+                    `Url` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUrl!=null and where.rightFuzzyUrl.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUrl"  separator="or" item="item">
+                    `Url` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test="where.pathList != null">
+                `path` in
+                <foreach collection="where.pathList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test ="where.fuzzyPath!=null and where.fuzzyPath.size()>0">
+                (
+                <foreach collection="where.fuzzyPath"  separator="or" item="item">
+                    `Path` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPath!=null and where.rightFuzzyPath.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPath"  separator="or" item="item">
+                    `Path` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test="where.componentList != null">
+                `component` in
+                <foreach collection="where.componentList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test ="where.fuzzyComponent!=null and where.fuzzyComponent.size()>0">
+                (
+                <foreach collection="where.fuzzyComponent"  separator="or" item="item">
+                    `Component` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyComponent!=null and where.rightFuzzyComponent.size()>0">
+                (
+                <foreach collection="where.rightFuzzyComponent"  separator="or" item="item">
+                    `Component` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test="where.nameList != null">
+                `name` in
+                <foreach collection="where.nameList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test ="where.fuzzyName!=null and where.fuzzyName.size()>0">
+                (
+                <foreach collection="where.fuzzyName"  separator="or" item="item">
+                    `Name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyName!=null and where.rightFuzzyName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyName"  separator="or" item="item">
+                    `Name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test="where.iconClsList != null">
+                `icon_cls` in
+                <foreach collection="where.iconClsList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test ="where.fuzzyIconCls!=null and where.fuzzyIconCls.size()>0">
+                (
+                <foreach collection="where.fuzzyIconCls"  separator="or" item="item">
+                    `Icon_cls` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyIconCls!=null and where.rightFuzzyIconCls.size()>0">
+                (
+                <foreach collection="where.rightFuzzyIconCls"  separator="or" item="item">
+                    `Icon_cls` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test="where.keepAliveList != null">
+                `keep_alive` in
+                <foreach collection="where.keepAliveList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.keepAliveSt !=null">
+                `keep_alive` >= #{where.keepAliveSt} and
+            </if>
+            <if test="where.keepAliveEd!=null">
+                `keep_alive` &lt;= #{where.keepAliveEd} and
+            </if>
+            <if test="where.requireAuthList != null">
+                `require_auth` in
+                <foreach collection="where.requireAuthList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.requireAuthSt !=null">
+                `require_auth` >= #{where.requireAuthSt} and
+            </if>
+            <if test="where.requireAuthEd!=null">
+                `require_auth` &lt;= #{where.requireAuthEd} and
+            </if>
+            <if test="where.enableList != null">
+                `enable` in
+                <foreach collection="where.enableList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.enableSt !=null">
+                `enable` >= #{where.enableSt} and
+            </if>
+            <if test="where.enableEd!=null">
+                `enable` &lt;= #{where.enableEd} and
+            </if>
+            <if test="where.createUserList != null">
+                `create_user` in
+                <foreach collection="where.createUserList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.createUserSt !=null">
+                `create_user` >= #{where.createUserSt} and
+            </if>
+            <if test="where.createUserEd!=null">
+                `create_user` &lt;= #{where.createUserEd} and
+            </if>
+            <if test="where.createTimeList != null">
+                `create_time` in
+                <foreach collection="where.createTimeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.createTimeSt !=null">
+                `create_time` >= #{where.createTimeSt} and
+            </if>
+            <if test="where.createTimeEd!=null">
+                `create_time` &lt;= #{where.createTimeEd} and
+            </if>
+            <if test="where.updateUserList != null">
+                `update_user` in
+                <foreach collection="where.updateUserList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.updateUserSt !=null">
+                `update_user` >= #{where.updateUserSt} and
+            </if>
+            <if test="where.updateUserEd!=null">
+                `update_user` &lt;= #{where.updateUserEd} and
+            </if>
+            <if test="where.updateTimeList != null">
+                `update_time` in
+                <foreach collection="where.updateTimeList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.updateTimeSt !=null">
+                `update_time` >= #{where.updateTimeSt} and
+            </if>
+            <if test="where.updateTimeEd!=null">
+                `update_time` &lt;= #{where.updateTimeEd} and
+            </if>
+            <if test="where.delFlagList != null">
+                `del_flag` in
+                <foreach collection="where.delFlagList" close=")" open="(" separator="," item="item">
+                    #{item}
+                </foreach> and
+            </if>
+            <if test="where.delFlagSt !=null">
+                `del_flag` >= #{where.delFlagSt} and
+            </if>
+            <if test="where.delFlagEd!=null">
+                `del_flag` &lt;= #{where.delFlagEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.fanyetu.core.auth.entity.Menu" id="MenuMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="url" column="url"/>
+        <result property="path" column="path"/>
+        <result property="component" column="component"/>
+        <result property="name" column="name"/>
+        <result property="iconCls" column="icon_cls"/>
+        <result property="keepAlive" column="keep_alive"/>
+        <result property="requireAuth" column="require_auth"/>
+        <result property="enable" column="enable"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+
+    <select id="queryMenu" resultMap="MenuMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_menu`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="parentId != null">
+                `parent_id` = #{parentId} and
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url} and
+            </if>
+            <if test="path != null and path!=''">
+                `path` = #{path} and
+            </if>
+            <if test="component != null and component!=''">
+                `component` = #{component} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="iconCls != null and iconCls!=''">
+                `icon_cls` = #{iconCls} and
+            </if>
+            <if test="keepAlive != null">
+                `keep_alive` = #{keepAlive} and
+            </if>
+            <if test="requireAuth != null">
+                `require_auth` = #{requireAuth} and
+            </if>
+            <if test="enable != null">
+                `enable` = #{enable} and
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag} and
+            </if>
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Menu$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="parentIdList != null">
+                    `parent_id` in
+                    <foreach collection="parentIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="parentIdSt !=null">
+                    `parent_id` >= #{parentIdSt} and
+                </if>
+                <if test="parentIdEd!=null">
+                    `parent_id` &lt;= #{parentIdEd} and
+                </if>
+                <if test="urlList != null">
+                    `url` in
+                    <foreach collection="urlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUrl!=null and fuzzyUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyUrl"  separator="or" item="item">
+                        `Url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUrl!=null and rightFuzzyUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUrl"  separator="or" item="item">
+                        `Url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="pathList != null">
+                    `path` in
+                    <foreach collection="pathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPath!=null and fuzzyPath.size()>0">
+                    (
+                    <foreach collection="fuzzyPath"  separator="or" item="item">
+                        `Path` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPath!=null and rightFuzzyPath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPath"  separator="or" item="item">
+                        `Path` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="componentList != null">
+                    `component` in
+                    <foreach collection="componentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyComponent!=null and fuzzyComponent.size()>0">
+                    (
+                    <foreach collection="fuzzyComponent"  separator="or" item="item">
+                        `Component` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComponent!=null and rightFuzzyComponent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComponent"  separator="or" item="item">
+                        `Component` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="iconClsList != null">
+                    `icon_cls` in
+                    <foreach collection="iconClsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyIconCls!=null and fuzzyIconCls.size()>0">
+                    (
+                    <foreach collection="fuzzyIconCls"  separator="or" item="item">
+                        `Icon_cls` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIconCls!=null and rightFuzzyIconCls.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIconCls"  separator="or" item="item">
+                        `Icon_cls` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="keepAliveList != null">
+                    `keep_alive` in
+                    <foreach collection="keepAliveList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="keepAliveSt !=null">
+                    `keep_alive` >= #{keepAliveSt} and
+                </if>
+                <if test="keepAliveEd!=null">
+                    `keep_alive` &lt;= #{keepAliveEd} and
+                </if>
+                <if test="requireAuthList != null">
+                    `require_auth` in
+                    <foreach collection="requireAuthList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="requireAuthSt !=null">
+                    `require_auth` >= #{requireAuthSt} and
+                </if>
+                <if test="requireAuthEd!=null">
+                    `require_auth` &lt;= #{requireAuthEd} and
+                </if>
+                <if test="enableList != null">
+                    `enable` in
+                    <foreach collection="enableList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="enableSt !=null">
+                    `enable` >= #{enableSt} and
+                </if>
+                <if test="enableEd!=null">
+                    `enable` &lt;= #{enableEd} and
+                </if>
+                <if test="createUserList != null">
+                    `create_user` in
+                    <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createUserSt !=null">
+                    `create_user` >= #{createUserSt} and
+                </if>
+                <if test="createUserEd!=null">
+                    `create_user` &lt;= #{createUserEd} and
+                </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                <if test="updateUserList != null">
+                    `update_user` in
+                    <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateUserSt !=null">
+                    `update_user` >= #{updateUserSt} and
+                </if>
+                <if test="updateUserEd!=null">
+                    `update_user` &lt;= #{updateUserEd} and
+                </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                <if test="delFlagList != null">
+                    `del_flag` in
+                    <foreach collection="delFlagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="delFlagSt !=null">
+                    `del_flag` >= #{delFlagSt} and
+                </if>
+                <if test="delFlagEd!=null">
+                    `del_flag` &lt;= #{delFlagEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryMenuLimit1" resultMap="MenuMap">
+        select
+        <include refid="baseResult"></include>
+        from  `t_menu`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="parentId != null">
+                `parent_id` = #{parentId} and
+            </if>
+            <if test="url != null and url!=''">
+                `url` = #{url} and
+            </if>
+            <if test="path != null and path!=''">
+                `path` = #{path} and
+            </if>
+            <if test="component != null and component!=''">
+                `component` = #{component} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="iconCls != null and iconCls!=''">
+                `icon_cls` = #{iconCls} and
+            </if>
+            <if test="keepAlive != null">
+                `keep_alive` = #{keepAlive} and
+            </if>
+            <if test="requireAuth != null">
+                `require_auth` = #{requireAuth} and
+            </if>
+            <if test="enable != null">
+                `enable` = #{enable} and
+            </if>
+            <if test="createUser != null">
+                `create_user` = #{createUser} and
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime} and
+            </if>
+            <if test="updateUser != null">
+                `update_user` = #{updateUser} and
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime} and
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag} and
+            </if>
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Menu$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="parentIdList != null">
+                    `parent_id` in
+                    <foreach collection="parentIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="parentIdSt !=null">
+                    `parent_id` >= #{parentIdSt} and
+                </if>
+                <if test="parentIdEd!=null">
+                    `parent_id` &lt;= #{parentIdEd} and
+                </if>
+                <if test="urlList != null">
+                    `url` in
+                    <foreach collection="urlList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUrl!=null and fuzzyUrl.size()>0">
+                    (
+                    <foreach collection="fuzzyUrl"  separator="or" item="item">
+                        `Url` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUrl!=null and rightFuzzyUrl.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUrl"  separator="or" item="item">
+                        `Url` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="pathList != null">
+                    `path` in
+                    <foreach collection="pathList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPath!=null and fuzzyPath.size()>0">
+                    (
+                    <foreach collection="fuzzyPath"  separator="or" item="item">
+                        `Path` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPath!=null and rightFuzzyPath.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPath"  separator="or" item="item">
+                        `Path` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="componentList != null">
+                    `component` in
+                    <foreach collection="componentList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyComponent!=null and fuzzyComponent.size()>0">
+                    (
+                    <foreach collection="fuzzyComponent"  separator="or" item="item">
+                        `Component` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyComponent!=null and rightFuzzyComponent.size()>0">
+                    (
+                    <foreach collection="rightFuzzyComponent"  separator="or" item="item">
+                        `Component` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="iconClsList != null">
+                    `icon_cls` in
+                    <foreach collection="iconClsList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyIconCls!=null and fuzzyIconCls.size()>0">
+                    (
+                    <foreach collection="fuzzyIconCls"  separator="or" item="item">
+                        `Icon_cls` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyIconCls!=null and rightFuzzyIconCls.size()>0">
+                    (
+                    <foreach collection="rightFuzzyIconCls"  separator="or" item="item">
+                        `Icon_cls` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="keepAliveList != null">
+                    `keep_alive` in
+                    <foreach collection="keepAliveList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="keepAliveSt !=null">
+                    `keep_alive` >= #{keepAliveSt} and
+                </if>
+                <if test="keepAliveEd!=null">
+                    `keep_alive` &lt;= #{keepAliveEd} and
+                </if>
+                <if test="requireAuthList != null">
+                    `require_auth` in
+                    <foreach collection="requireAuthList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="requireAuthSt !=null">
+                    `require_auth` >= #{requireAuthSt} and
+                </if>
+                <if test="requireAuthEd!=null">
+                    `require_auth` &lt;= #{requireAuthEd} and
+                </if>
+                <if test="enableList != null">
+                    `enable` in
+                    <foreach collection="enableList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="enableSt !=null">
+                    `enable` >= #{enableSt} and
+                </if>
+                <if test="enableEd!=null">
+                    `enable` &lt;= #{enableEd} and
+                </if>
+                <if test="createUserList != null">
+                    `create_user` in
+                    <foreach collection="createUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createUserSt !=null">
+                    `create_user` >= #{createUserSt} and
+                </if>
+                <if test="createUserEd!=null">
+                    `create_user` &lt;= #{createUserEd} and
+                </if>
+                <if test="createTimeList != null">
+                    `create_time` in
+                    <foreach collection="createTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createTimeSt !=null">
+                    `create_time` >= #{createTimeSt} and
+                </if>
+                <if test="createTimeEd!=null">
+                    `create_time` &lt;= #{createTimeEd} and
+                </if>
+                <if test="updateUserList != null">
+                    `update_user` in
+                    <foreach collection="updateUserList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateUserSt !=null">
+                    `update_user` >= #{updateUserSt} and
+                </if>
+                <if test="updateUserEd!=null">
+                    `update_user` &lt;= #{updateUserEd} and
+                </if>
+                <if test="updateTimeList != null">
+                    `update_time` in
+                    <foreach collection="updateTimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updateTimeSt !=null">
+                    `update_time` >= #{updateTimeSt} and
+                </if>
+                <if test="updateTimeEd!=null">
+                    `update_time` &lt;= #{updateTimeEd} and
+                </if>
+                <if test="delFlagList != null">
+                    `del_flag` in
+                    <foreach collection="delFlagList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="delFlagSt !=null">
+                    `del_flag` >= #{delFlagSt} and
+                </if>
+                <if test="delFlagEd!=null">
+                    `del_flag` &lt;= #{delFlagEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+            `id`,
+            `parent_id`,
+            `url`,
+            `path`,
+            `component`,
+            `name`,
+            `icon_cls`,
+            `keep_alive`+0 as `keep_alive`,
+            `require_auth`+0 as `require_auth`,
+            `enable`+0 as `enable`,
+            `create_user`,
+            `create_time`,
+            `update_user`,
+            `update_time`,
+            `del_flag`+0 as `del_flag`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.fanyetu.core.auth.entity.Menu$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                        <if test="fetchFields.fetchFields.id==true">
+                            `id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.parentId==true">
+                            `parent_id`,
+                        </if>
+                        <if test="fetchFields.fetchFields.url==true">
+                            `url`,
+                        </if>
+                        <if test="fetchFields.fetchFields.path==true">
+                            `path`,
+                        </if>
+                        <if test="fetchFields.fetchFields.component==true">
+                            `component`,
+                        </if>
+                        <if test="fetchFields.fetchFields.name==true">
+                            `name`,
+                        </if>
+                        <if test="fetchFields.fetchFields.iconCls==true">
+                            `icon_cls`,
+                        </if>
+                        <if test="fetchFields.fetchFields.keepAlive==true">
+                            `keep_alive`+0 as `keep_alive`,
+                        </if>
+                        <if test="fetchFields.fetchFields.requireAuth==true">
+                            `require_auth`+0 as `require_auth`,
+                        </if>
+                        <if test="fetchFields.fetchFields.enable==true">
+                            `enable`+0 as `enable`,
+                        </if>
+                        <if test="fetchFields.fetchFields.createUser==true">
+                            `create_user`,
+                        </if>
+                        <if test="fetchFields.fetchFields.createTime==true">
+                            `create_time`,
+                        </if>
+                        <if test="fetchFields.fetchFields.updateUser==true">
+                            `update_user`,
+                        </if>
+                        <if test="fetchFields.fetchFields.updateTime==true">
+                            `update_time`,
+                        </if>
+                        <if test="fetchFields.fetchFields.delFlag==true">
+                            `del_flag`+0 as `del_flag`,
+                        </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                        <if test="fetchFields.excludeFields.id==null">
+                            `id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.parentId==null">
+                            `parent_id`,
+                        </if>
+                        <if test="fetchFields.excludeFields.url==null">
+                            `url`,
+                        </if>
+                        <if test="fetchFields.excludeFields.path==null">
+                            `path`,
+                        </if>
+                        <if test="fetchFields.excludeFields.component==null">
+                            `component`,
+                        </if>
+                        <if test="fetchFields.excludeFields.name==null">
+                            `name`,
+                        </if>
+                        <if test="fetchFields.excludeFields.iconCls==null">
+                            `icon_cls`,
+                        </if>
+                        <if test="fetchFields.excludeFields.keepAlive==null">
+                            `keep_alive`+0 as `keep_alive`,
+                        </if>
+                        <if test="fetchFields.excludeFields.requireAuth==null">
+                            `require_auth`+0 as `require_auth`,
+                        </if>
+                        <if test="fetchFields.excludeFields.enable==null">
+                            `enable`+0 as `enable`,
+                        </if>
+                        <if test="fetchFields.excludeFields.createUser==null">
+                            `create_user`,
+                        </if>
+                        <if test="fetchFields.excludeFields.createTime==null">
+                            `create_time`,
+                        </if>
+                        <if test="fetchFields.excludeFields.updateUser==null">
+                            `update_user`,
+                        </if>
+                        <if test="fetchFields.excludeFields.updateTime==null">
+                            `update_time`,
+                        </if>
+                        <if test="fetchFields.excludeFields.delFlag==null">
+                            `del_flag`+0 as `del_flag`,
+                        </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                            `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.fanyetu.core.auth.entity.Menu$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>
